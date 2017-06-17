@@ -11,11 +11,13 @@ Recently, I was challenged by a job interview coding test in which several varia
 be allowed.
 
 * Create an application that can read in commands of the following form –
+<pre>
 PLACE X,Y,F
 MOVE
 LEFT
 RIGHT
 REPORT
+</pre>
 
 * PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
 * The origin (0,0) can be considered to be the SOUTH WEST most corner.
