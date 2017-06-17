@@ -1,19 +1,22 @@
 # toy_robot_test
 
-Recently, I was challenged by a job interview coding test in which several variations of robots had to be coded up and tested.  Very much interested in the solution, I found a similar test online and coded it up.  This is not the exercise that was given to me, but proves interesting nonetheless.  It is good coding practice as well.
+Recently, I was challenged by a job interview coding test in which several variations of robots had to be coded up and tested.
+  Very much interested in the solution, I found a similar test online and coded it up.  
+  This is not the exercise that was given to me, but proves interesting nonetheless.  
+  It is good coding practice as well.
 
 ### Prerequisites
 * maven 3.3+
 * git
 * java 1.7+
 
-## To execute the code
+### To execute the code
 * git clone https://github.com/jesimone57/toy_robot_test.git
 * cd toy_robot_test
 * mvn clean compile test
 * mvn exec:java -Dexec.mainClass="Simulator"
 
-### Toy Robot Test Description:
+## Toy Robot Test Description
 
 * The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
 * There are no other obstructions on the table surface.
@@ -40,11 +43,11 @@ REPORT
 * Input can be from a file, or from standard input, as the developer chooses.
 * Provide test data to exercise the application.
 
-### Constraints:
+### Constraints
 * The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
 * Any move that would cause the robot to fall must be ignored.
 
-### Example Input and Output:
+### Example Input and Output
 
 <pre>
 a)
