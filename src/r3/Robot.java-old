@@ -1,0 +1,126 @@
+package r3;
+
+public class Robot {
+	private Integer positionX;
+	private Integer positionY;
+	private Facing facing;
+	private TableTop tableTop;
+	private enum Turning {
+		LEFT, RIGHT;
+	}
+	private boolean isPlaceAllowed;
+
+	public Robot(TableTop tableTop) {
+		if (tableTop == null) {
+			throw new IllegalArgumentException("Robot constructor argument TableTope is null");
+		}
+		this.tableTop = tableTop;
+	}
+
+	public Integer getPositionX() {
+		return positionX;
+	}
+
+	public Integer getPositionY() {
+		return positionY;
+	}
+
+	public Facing getFacing() {
+		return facing;
+	}
+
+	public TableTop getTableTop() {
+		return tableTop;
+	}
+
+	public boolean place(int x, int y, Facing facing) {
+		isPlaceAllowed = false;
+		if (tableTop.isPositionAllowed(x, y) && facing != null) {
+			this.positionX = x;
+			this.positionY = y;
+			this.facing = facing;
+			isPlaceAllowed = true;
+		} else {
+			System.out.println("Place X=" + x + " Y=" + y + " facing=" + facing + " is invalid and not allowed");
+		}
+		return isPlaceAllowed;
+	}
+
+	public void left() {
+		if (isPlaceAllowed) {
+			turn(Turning.LEFT);
+		} else {
+			System.out.println("No valid place command. turn LEFT ignored");
+		}
+	}
+
+	public void right() {
+		if (isPlaceAllowed) {
+			turn(Turning.RIGHT);
+		} else {
+			System.out.println("No valid place command. turn RIGHT ignored");
+		}
+	}
+
+	public boolean move() {
+		boolean isMoveAllowed = false;
+		if (isPlaceAllowed) {
+			int newX = positionX;
+			int newY = positionY;
+			switch (facing) {
+			case NORTH:
+				newY++;
+				break;
+			case SOUTH:
+				newY--;
+				break;
+			case EAST:
+				newX++;
+				break;
+			case WEST:
+				newX--;
+				break;
+			}
+			isMoveAllowed = tableTop.isPositionAllowed(newX, newY);
+			if (isMoveAllowed) {
+				positionX = newX;
+				positionY = newY;
+			} else {
+				System.out.println(
+						"Move to X=" + newX + " Y=" + newY + " while facing=" + facing + " is invalid and not allowed");
+			}
+		} else {
+			System.out.println("No valid place command. MOVE ignored");
+		}
+		return isMoveAllowed;
+	}
+
+	public String report() {
+		if (isPlaceAllowed) {
+			String report = positionX + "," + positionY + "," + facing.toString();
+			System.out.println(report);
+			return report;
+		} else {
+			System.out.println("No valid place command. REPORT ignored");
+		}
+		return null;
+	}
+
+	private void turn(Turning turning) {
+		switch (facing) {
+		case NORTH:
+			facing = turning == Turning.LEFT ? Facing.WEST : Facing.EAST;
+			break;
+		case SOUTH:
+			facing = turning == Turning.LEFT ? Facing.EAST : Facing.WEST;
+			break;
+		case EAST:
+			facing = turning == Turning.LEFT ? Facing.NORTH : Facing.SOUTH;
+			break;
+		case WEST:
+			facing = turning == Turning.LEFT ? Facing.SOUTH : Facing.NORTH;
+			break;
+		}
+	}
+
+}

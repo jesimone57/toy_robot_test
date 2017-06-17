@@ -1,0 +1,131 @@
+package r3;
+
+public class Robot {
+	
+	public Integer getPositionX() {
+		return positionX;
+	}
+
+	public Integer getPositionY() {
+		return positionY;
+	}
+
+	public Facing getFacing() {
+		return facing;
+	}
+
+	public TableTop getTableTop() {
+		return tableTop;
+	}
+
+	public boolean isPlaceAllowed() {
+		return isPlaceAllowed;
+	}
+
+	private Integer positionX;
+	private Integer positionY;
+	private Facing facing;
+	private enum Turning { LEFT, RIGHT; }
+	private TableTop tableTop;
+	private boolean isPlaceAllowed;
+	
+	public Robot(TableTop tableTop) {
+		if (tableTop == null) {
+			throw new IllegalArgumentException("tabletop can't be null");
+		}
+		this.tableTop = tableTop;
+	}
+	
+	public void left() {
+		if (isPlaceAllowed) {
+			turn(Turning.LEFT);
+		} else {
+			System.out.println("No valid place command.  LEFT ignored.");
+		}
+	}
+	
+	public void right() {
+		if (isPlaceAllowed) {
+			turn(Turning.RIGHT);
+		} else {
+			System.out.println("No valid place command.  RIGHT ignored.");
+		}
+	}
+	
+	public String report() {
+		String report = null;
+		if (isPlaceAllowed) {
+			report = positionX+","+positionY+","+facing.toString();
+			System.out.println(report);
+		} else {
+			System.out.println("No valid place command.  REPORT ignored.");
+		}
+		return report;
+	}
+	
+	public boolean move() {
+		boolean isMoveAllowed = false;
+		if (isPlaceAllowed) {
+			int newX = positionX;
+			int newY = positionY;
+			
+			switch (facing) {
+			case NORTH:
+				newY++;
+				break;
+			case SOUTH:
+				newY--;
+				break;
+			case EAST:
+				newX++;
+				break;
+			case WEST:
+				newX--;
+				break;
+			}	
+			isMoveAllowed = tableTop.isPositionAllowed(newX, newY);
+			if (isMoveAllowed) {
+				positionX = newX;
+				positionY = newY;
+			} else {
+				System.out.println("No valid place command.  MOVE ignored.");
+			}
+			
+		} else {
+			System.out.println("No valid place command.  MOVE ignored.");
+		}
+		return isMoveAllowed;
+	}
+	
+	// NOTE:  place is allowed IF and ONLY IF the position is allowed on the table top
+	public boolean place(int x, int y, Facing facing) {
+		isPlaceAllowed = tableTop.isPositionAllowed(x, y);
+		if (isPlaceAllowed && facing != null) {
+			this.positionX = x;
+			this.positionY = y;
+			this.facing = facing;
+		} else {
+			System.out.println("Place in invalid X="+x+" Y="+y+" Facing="+facing);
+			isPlaceAllowed = false;
+		}
+		return isPlaceAllowed;
+	}
+	
+	private void turn(Turning turning) {
+		switch (facing) {
+		case NORTH:
+			facing = turning == Turning.LEFT ? Facing.WEST : Facing.EAST;
+			break;
+		case SOUTH:
+			facing = turning == Turning.LEFT ? Facing.EAST : Facing.WEST;
+			break;
+		case EAST:
+			facing = turning == Turning.LEFT ? Facing.NORTH : Facing.SOUTH;
+			break;
+		case WEST:
+			facing = turning == Turning.LEFT ? Facing.SOUTH : Facing.NORTH;
+			break;
+		}	
+	}
+
+}
