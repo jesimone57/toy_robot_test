@@ -1,11 +1,7 @@
-package tests;
+import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import r3.Facing;
 
 public class RobotPlaceTest extends RobotTestHelper {
 
@@ -23,14 +19,14 @@ public class RobotPlaceTest extends RobotTestHelper {
 	}
 
 	@Test
-	public void invalidPlaceBadX() {
+	public void invalidPlaceNegativeX() {
 		boolean isPlaceAllowed = robot.place(-1, 0, Facing.NORTH);
 		validateRobotCurrentState(robot, null, null, null, false, isPlaceAllowed);
 		assertFalse(robot.isPlaceAllowed());
 	}
 
 	@Test
-	public void invalidPlaceBadY() {
+	public void invalidPlaceNegativeY() {
 		boolean isPlaceAllowed = robot.place(0, -1, Facing.NORTH);
 		validateRobotCurrentState(robot, null, null, null, false, isPlaceAllowed);
 		assertFalse(robot.isPlaceAllowed());

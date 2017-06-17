@@ -1,10 +1,6 @@
-package tests;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import r3.Facing;
+import static org.junit.Assert.assertEquals;
 
 public class RobotReportTest extends RobotTestHelper {
 
@@ -19,6 +15,5 @@ public class RobotReportTest extends RobotTestHelper {
 		robot.place(-1, 0, Facing.NORTH);
 		assertEquals(null, robot.report() );
 	}
-
 
 }

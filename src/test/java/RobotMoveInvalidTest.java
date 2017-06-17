@@ -1,8 +1,4 @@
-package tests;
-
 import org.junit.Test;
-
-import r3.Facing;
 
 public class RobotMoveInvalidTest extends RobotTestHelper {
 

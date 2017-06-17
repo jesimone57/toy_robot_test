@@ -1,11 +1,7 @@
-package tests;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import r3.SquareTableTop;
-import r3.TableTop;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TableTopTest {
 

@@ -1,8 +1,4 @@
-package tests;
-
 import org.junit.Test;
-
-import r3.Robot;
 
 public class RobotConstructorTest {
 
@@ -10,8 +6,5 @@ public class RobotConstructorTest {
 	public void constructRobot() {
 		new Robot(null);
 	}
-	
-
-
 
 }

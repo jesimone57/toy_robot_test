@@ -1,5 +1,3 @@
-package r3;
-
 public class SquareTableTop implements TableTop {
 
 	private int dimensionX;
